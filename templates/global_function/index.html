@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rad Saskara</title>
+</head>
+<body>
+  <ul>
+    {{range.}}
+    <li>{{.Name}} - {{.Make}}</li>
+    {{end}}
+  </ul>
+  <ul>
+    {{range.}}
+      {{if .Name}}
+        <li>{{.Name}} - {{.Make}}</li>
+      {{end}}
+    {{end}}
+  </ul>
+  <ul>
+    {{range.}}
+      {{if and .Name .Make }}
+        <li>{{.Name}} - {{.Make}}</li>
+      {{end}}
+    {{end}}
+  </ul>
+</body>
+</html>
