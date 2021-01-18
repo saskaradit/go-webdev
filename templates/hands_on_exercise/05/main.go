@@ -2,11 +2,11 @@ package main
 
 import (
 	"encoding/csv"
-	"html/template"
 	"log"
 	"net/http"
 	"os"
 	"strconv"
+	"text/template"
 	"time"
 )
 
@@ -25,12 +25,12 @@ func foo(res http.ResponseWriter, req *http.Request) {
 	records := prs("table.csv")
 
 	// parse template
-	tpl, err := template.ParseFiles("hw.gohtml")
+	tpl, err := template.ParseFiles("hw.go.html")
 	if err != nil {
 		log.Fatalln(err)
 	}
 
-	// execute template
+	// Execute Template
 	err = tpl.Execute(res, records)
 	if err != nil {
 		log.Fatalln(err)
@@ -44,14 +44,13 @@ func prs(filePath string) []Record {
 	}
 	defer src.Close()
 
-	rdr := csv.NewReader(src)
-	rows, err := rdr.ReadAll()
+	reader := csv.NewReader(src)
+	rows, err := reader.ReadAll()
 	if err != nil {
 		log.Fatalln(err)
 	}
 
 	records := make([]Record, 0, len(rows))
-
 	for i, row := range rows {
 		if i == 0 {
 			continue
@@ -66,5 +65,4 @@ func prs(filePath string) []Record {
 	}
 
 	return records
-
 }
